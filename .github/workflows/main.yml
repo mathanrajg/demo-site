@@ -6,14 +6,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@main
+        uses: easingthemes/ssh-deploy@v2.1.5
         env:
           REMOTE_HOST: ssh.getflywheel.com
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           REMOTE_PORT: '22 -o PubkeyAcceptedKeyTypes=+ssh-rsa'
           REMOTE_USER: ${{ secrets.SSH_USER }}
-          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          ARGS: -rltgoDzvO
-          EXCLUDE: "/.git, /.github, /README.md, /.DS_Store, /node_modules/"
+          ARGS: '-rltgoDzvO --exclude .git --exclude .github'
           TARGET: '/www/wp-content/themes/'
