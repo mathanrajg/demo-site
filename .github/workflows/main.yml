@@ -10,7 +10,7 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
-          REMOTE_HOST: ssh.getflywheel.com
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_PORT: '22 -o PubkeyAcceptedKeyTypes=+ssh-rsa'
           REMOTE_USER: ${{ secrets.SSH_USER }}
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
